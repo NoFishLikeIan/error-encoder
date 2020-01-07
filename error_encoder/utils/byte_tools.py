@@ -1,3 +1,5 @@
+import numpy as np
+
 from typing import List, Union
 from functools import partial
 
@@ -13,13 +15,15 @@ def b_range(stop: int) -> List[bytes]:
         yield bin(integer)
 
 
+def int_to_bitvec(binary: str, length=None) -> np.array:
+    prefix = '' if length is None else f'0{length}'
+    binary_string = format(binary, f'{prefix}b')
+    return np.array([int(b) for b in binary_string])
+
+
+def bitvec_to_int(vec: np.array) -> str:
+    return ''.join((str(i) for i in vec.tolist())).lstrip('0')
+
+
 if __name__ == '__main__':
-    test = []
-
-    for i in range(5):
-        parity = 2**i
-        result = is_parity_bit(bin(parity))
-        test.append(result)
-
-        if result is False:
-            print(parity, ' yielded false!')
+    pass
