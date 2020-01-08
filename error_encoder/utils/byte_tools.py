@@ -22,11 +22,14 @@ def int_to_bitvec(binary: str, length=None) -> np.array:
 
 
 def bitvec_to_bitstr(vec: np.array) -> str:
-    return ''.join((str(i) for i in vec.tolist())).lstrip('0')
+    return ''.join((str(int(i)) for i in vec.tolist())).lstrip('0')
 
 
 def bitvec_to_int(vec: np.array) -> int:
-    return int(bitvec_to_bitstr, base=2)
+    vec_gf2 = np.mod(vec, 2)
+    stringified = bitvec_to_bitstr(vec_gf2)
+
+    return int(stringified, base=2)
 
 
 if __name__ == '__main__':
