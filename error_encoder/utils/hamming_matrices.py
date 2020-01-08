@@ -26,7 +26,7 @@ def generate_H(n: int, k: int) -> np.array:
     """
 
     c = n-k
-    H = np.zeros((n, c))
+    H = np.zeros((n, c), dtype=int)
 
     for row in range(n):
         binary_rap = int_to_bitvec(row + 1, length=c)
@@ -42,7 +42,7 @@ def systematize_algorithm(H: np.array) -> Tuple[np.array, np.array, np.array]:
     n, c = H.shape
     m = np.abs(n-c)
 
-    G_s = np.zeros((m, c))
+    G_s = np.zeros((m, c), dtype=int)
     G_s[:, :m] = np.identity(m)
 
     H_s, permutation = systematize_matrix(H, post_system=True)
@@ -63,6 +63,6 @@ def matrices_from_m(m: int):
 
     H = generate_H(n, k)
 
-    G, _, _ = systematize_algorithm(H)
+    _, G_s, H_s = systematize_algorithm(H)
 
-    return H, G
+    return H_s, G_s
