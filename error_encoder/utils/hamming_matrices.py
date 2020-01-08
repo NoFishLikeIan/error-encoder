@@ -56,3 +56,13 @@ def systematize_algorithm(H: np.array) -> Tuple[np.array, np.array, np.array]:
     G = G_s[:, rev_permutation]
 
     return G, G_s, H_s
+
+
+def matrices_from_m(m: int):
+    n, k = dimensions_hamming(m)
+
+    H = generate_H(n, k)
+
+    G, _, _ = systematize_algorithm(H)
+
+    return H, G
